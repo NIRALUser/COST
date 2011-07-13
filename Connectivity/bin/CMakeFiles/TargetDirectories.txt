@@ -1,0 +1,2 @@
+/home/alex/Desktop/Connectivity/bin/CMakeFiles/Prob_Project.dir
+/home/alex/Desktop/Connectivity/bin/CMakeFiles/main.dir

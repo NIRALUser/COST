@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<executable>
+<title>A title</title>
+<description>A description</description>
+  <parameters>
+
+<string>
+<name>file_basis_image_str</name>
+<flag></flag> </string> 
+<string>
+<name>file_final_str</name>
+<flag></flag> </string> 
+<string>
+<name>file_input_label_str</name>
+<flag></flag> </string>
+
+<integer>
+<name>icosahedronSubdivision_int</name>
+<flag></flag> </integer>
+
+<float>
+<name>thresholdCoefficient_float</name>
+<default>.0625</default>
+<longflag>stepSize</longflag>
+</float> 
+
+<integer>
+<name>vector_or_odf_int</name>
+<flag></flag> </integer>
+<integer>
+<name>prob_or_cost_int</name>
+<flag></flag> </integer>
+ 
+  </parameters>
+</executable>
