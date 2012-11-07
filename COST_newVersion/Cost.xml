@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<executable>
+<title>COST: COnnectivity from local Spherical diffusion cosT</title>
+<description></description>
+ 
+
+<parameters>
+
+<string>
+  <name>odf_image</name>
+  <description>ODF image</description> 
+</string> 
+
+<string>
+  <name>fa_image</name>
+  <description>FA image</description>
+</string>
+
+<string>
+  <name>output_filename_base</name>
+  <description>Output file name base</description> 
+</string> 
+
+<string>
+  <name>source_image</name>
+  <description>Source image</description>
+</string>
+
+<integer>
+  <name>numberOfSamplesOnHemisphere</name>
+  <longflag>numberOfSamplesOnHemisphere</longflag> 
+  <default>100</default>
+</integer>
+
+<double>
+  <name>alpha</name>
+  <longflag>alpha</longflag> 
+  <default>1.0</default>
+</double>
+
+<integer>
+  <name>numberOfSpharm</name>
+  <longflag>numberOfSpharm</longflag> 
+  <default>15</default>
+</integer>
+
+<boolean>
+   <name>streamline</name>
+   <longflag>streamline</longflag>
+</boolean>
+
+<boolean>
+   <name>singleTract</name>
+   <longflag>singleTract</longflag>
+</boolean>
+
+<boolean>
+   <name>writeFA</name>
+   <longflag>writeFA</longflag>
+</boolean>
+
+<boolean>
+   <name>writeColorFA</name>
+   <longflag>writeColorFA</longflag>
+</boolean>
+
+<boolean>
+   <name>reconDebug</name>
+   <longflag>reconDebug</longflag>
+</boolean>
+
+</parameters>
+</executable>
