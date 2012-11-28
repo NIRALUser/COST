@@ -68,7 +68,11 @@ int main(int argc, char * argv[])
   //added by Wenyu
   DoubleImageType::Pointer OrigFAImage            = DoubleImageType::New();
   DoubleReaderType::Pointer OrigFAReader          = DoubleReaderType::New();
-	
+
+  // WM mask  (Added by Adrien Kaiser)
+  ImageType::Pointer WMmaskImage            = ImageType::New();
+  ReaderType::Pointer WMmaskReader         = ReaderType::New();
+
   //Source (label) image pointers
   ImageType::Pointer SourceImage 	= ImageType::New();
   ReaderType::Pointer SourceReader      = ReaderType::New();
@@ -102,6 +106,19 @@ int main(int argc, char * argv[])
     }
   OrigFAImage = OrigFAReader->GetOutput();
   
+  //read WM mask (Added by Adrien Kaiser)
+  WMmaskReader->SetFileName( wmmask_image );
+  try
+    {
+      WMmaskReader->Update();
+    }
+  catch( itk::ExceptionObject & excp )
+    {
+      std::cerr << "Problem reading the input wm mask file: " << wmmask_image << std::endl;
+      std::cerr << excp << std::endl;
+      return EXIT_FAILURE;
+    }
+  WMmaskImage = WMmaskReader->GetOutput();
 
   // read odf image
   ODFReader->SetFileName ( odf_image ) ;
@@ -208,7 +225,7 @@ int main(int argc, char * argv[])
     }
 
   // compute cost
-  ODFCostType ODFCostComputer ( ODFImage, OrigFAImage, numberOfSamplesOnHemisphere * 2, alpha
+  ODFCostType ODFCostComputer ( ODFImage, OrigFAImage, WMmaskImage, numberOfSamplesOnHemisphere * 2, alpha
 				) ;
   ODFCostComputer.SetCoordinateTable ( ODFreconstructor.GetCoordinateTable () ) ;
   ODFCostComputer.SetFAImage ( FAImage ) ;
@@ -221,6 +238,7 @@ int main(int argc, char * argv[])
   DoubleWriterType::Pointer costWriter = DoubleWriterType::New() ;
   costWriter->SetFileName ( costFileName ); 
   costWriter->SetInput( costImage );
+  costWriter->SetUseCompression(true); // Added by Adrien Kaiser
   try
     {
       costWriter->Update() ;
@@ -236,6 +254,7 @@ int main(int argc, char * argv[])
   DoubleWriterType::Pointer origWriter = DoubleWriterType::New() ;
   origWriter->SetFileName ( origFileName ); 
   origWriter->SetInput( origImage );
+  origWriter->SetUseCompression(true); // Added by Adrien Kaiser
   try
     {
       origWriter->Update() ;
@@ -252,6 +271,7 @@ int main(int argc, char * argv[])
   DoubleWriterType::Pointer lengthWriter = DoubleWriterType::New() ;
   lengthWriter->SetFileName ( lengthFileName ); 
   lengthWriter->SetInput( lengthImage );
+  lengthWriter->SetUseCompression(true); // Added by Adrien Kaiser
   try
     {
       lengthWriter->Update() ;
